@@ -1,0 +1,66 @@
+//
+//  PrefixHeader.pch
+//  MyCalendar
+//
+//  Created by 马浩 on 2018/10/25.
+//  Copyright © 2018年 mh. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import <UIKit/UIKit.h>
+#import "MHCalendarManager.h"
+#import "NSDate+Decomposer.h"
+#import "UILabel+MHMH.h"
+#import "UIView+MHMH.h"
+#import "NSString+MHMH.h"
+
+//iPhone X判断
+#define K_IS_IphoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436),[UIScreen mainScreen].currentMode.size) : NO)
+
+
+#define Screen_WIDTH [UIScreen mainScreen].bounds.size.width
+#define Screen_HEIGTH [UIScreen mainScreen].bounds.size.height
+
+#define NavHeight      (K_IS_IphoneX ? 88.0 : 64.0)    //导航栏高度
+
+#define Width(i) i*(Screen_WIDTH/375)
+
+#define k_bottom_margin    (K_IS_IphoneX ? 34.0 : 0.0)   //底部安全区域高度
+
+#define HexRGBAlpha(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:(a)]
+#define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define RGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+
+
+#define DLog(fmt, ...) NSLog((fmt), ##__VA_ARGS__);
+
+
+#define FONT(x)        [UIFont systemFontOfSize:Width(x)]
+
+
+static NSInteger const minYear = 1901;//最小年份
+static NSInteger const maxYearCount = 148;//年份数量
+
+#pragma mark - 农历日期数据
+static NSArray * lunarDaysArr() {
+    return @[@"初一",@"初二",@"初三",@"初四",@"初五",@"初六",@"初七",@"初八",@"初九",@"初十",
+             @"十一",@"十二",@"十三",@"十四",@"十五",@"十六",@"十七",@"十八",@"十九",@"二十",
+             @"廿一",@"廿二",@"廿三",@"廿四",@"廿五",@"廿六",@"廿七",@"廿八",@"廿九",@"三十"];
+}
+
+#pragma mark - 农历月份数据
+static NSArray * lunarMonthsArr() {
+    return @[@"正月",@"二月",@"三月",@"四月",@"五月",@"六月",@"七月",@"八月",@"九月",@"十月",
+             @"冬月",@"腊月"];
+}
+
+#pragma mark - 时间选择格式 公历 农历
+typedef enum : NSInteger {
+    DayPickerTypeSolar       = 0,//公历
+    DayPickerTypeLunar       = 1,//农历
+}DayPickerType;
+
+
+#endif /* PrefixHeader_pch */
